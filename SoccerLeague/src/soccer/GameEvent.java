@@ -14,6 +14,7 @@ public abstract class GameEvent {
 	public double getTheTime() {
 		return theTime;
 	}
+	
 	public void setTheTime(double theTime) {
 		this.theTime = theTime;
 	}

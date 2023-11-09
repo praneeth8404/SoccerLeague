@@ -42,7 +42,7 @@ public class Game {
 		int homeTeamPoints=0;
 		int awayTeamPoints=0;
 		StringBuilder result=new StringBuilder();
-		result.append(homeTeam.getTeamName()+" Vs "+awayTeam.getTeamName()+"\n"+"Date "+this.theDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE)+"\n");
+		result.append(homeTeam.getTeamName()+" Vs "+awayTeam.getTeamName()+"\n"+"Date "+this.theDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE)+"\n ");
 		for(GameEvent GameEvent:this.gameEvents) {
 			if(GameEvent.getTheTeam()==homeTeam) {
 				homeTeamGoals++;

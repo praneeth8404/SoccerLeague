@@ -1,13 +1,30 @@
 package soccer;
 
-public class Team {
+import java.util.Arrays;
+
+public class Team implements Comparable{
 	private String teamName;
 	private Player[] playerArray;
 	private int pointsTotal;
 	private int goalsTotal;
+	
+	public int compareTo(Object theTeam) {
+		int returnVal=-1;
+		if(this.getPointsTotal()<((Team)theTeam).getPointsTotal()) {
+			returnVal=1;
+		}else if(this.getPointsTotal()==((Team)theTeam).getPointsTotal()) {
+			if(this.getGoalsTotal()<((Team)theTeam).getGoalsTotal()) {
+				returnVal=1;
+			}
+		}
+		
+		return returnVal;
+		
+	}
 	public int getGoalsTotal() {
 		return goalsTotal;
 	}
+	
 	public void setGoalsTotal(int goalsTotal) {
 		this.goalsTotal = goalsTotal;
 	}
@@ -23,6 +40,10 @@ public class Team {
 	
 	public void incGoalsTotal(int goalsTotal) {
 		this.goalsTotal+=goalsTotal;
+	}
+	@Override
+	public String toString() {
+		return "Team [teamName=" + teamName + "]";
 	}
 	public String getTeamName() {
 		return teamName;

@@ -17,11 +17,12 @@ public class Game {
 		ArrayList<GameEvent> eventList=new ArrayList();
 		GameEvent currEvent;
 		for(int i=0;i<=90;i++) {
-			if(Math.random()>0.95) {
+			if(Math.random()>0.8) {
 //				System.out.println(i);
-				currEvent=(Math.random()>0.6)?new Goal():new Possession();
+				currEvent=(Math.random()>0.8)?new Goal():new Possession();
 				currEvent.setTheTeam(Math.random()>0.5?homeTeam:awayTeam);
 				currEvent.setThePlayer(currEvent.getTheTeam().getPlayerArray()[(int) (Math.random()*currEvent.getTheTeam().getPlayerArray().length)]);
+				currEvent.getThePlayer().incGoalsScored();
 				currEvent.setTheTime(i);
 				eventList.add(currEvent);
 			}
@@ -44,6 +45,7 @@ public class Game {
 		StringBuilder result=new StringBuilder();
 		result.append(homeTeam.getTeamName()+" Vs "+awayTeam.getTeamName()+"\n"+"Date "+this.theDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE)+"\n");
 		for(GameEvent GameEvent:this.gameEvents) {
+			if(GameEvent instanceof Goal) {
 			if(GameEvent.getTheTeam()==homeTeam) {
 				homeTeamGoals++;
 				homeTeam.incGoalsTotal(1);
@@ -51,10 +53,12 @@ public class Game {
 				awayTeamGoals++;
 				awayTeam.incGoalsTotal(1);
 			}
-			
-			result.append(GameEvent.getThePlayer().getPlayerName()+" has scored a for "+GameEvent+" "+GameEvent.getTheTeam().getTeamName()+" at "+GameEvent.getTheTime()+"\n");
+			}
+//			GameEvent.getThePlayer().incGoalsScored();
+//			result.append(GameEvent.getThePlayer().getPlayerName()+ " has "+GameEvent+" for"+GameEvent.getTheTeam().getTeamName()+" at "+GameEvent.getTheTime()+"\n");
 			
 		}
+		result.append("Hometeam: "+homeTeam.getTeamName()+", AwayTeam: "+awayTeam.getTeamName()+"\n");
 		if(homeTeamGoals==awayTeamGoals) {
 			homeTeam.incPointsTotal(1);
 			awayTeam.incPointsTotal(1);
@@ -71,22 +75,7 @@ public class Game {
 		
 	}
 	
-	public Team DecideWinner() {
-		Team winner = null;
-		
-		if(homeTeam.getPointsTotal()>awayTeam.getPointsTotal()) {
-			winner=homeTeam;
-		}else if(homeTeam.getPointsTotal()<awayTeam.getPointsTotal()){
-			winner=awayTeam;
-		}else {
-			if(homeTeam.getGoalsTotal()>awayTeam.getGoalsTotal()) {
-				winner=homeTeam;
-			}else {
-				winner=awayTeam;
-			}
-		}
-		return winner;		
-	}
+
 
 		
 	public Team getHomeTeam() {

@@ -4,7 +4,7 @@ public class Possession extends GameEvent {
 
 	@Override
 	public String toString() {
-		return "Possession";
+		return "has possesed the ball";
 	}
 
 	
